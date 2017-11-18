@@ -10,11 +10,13 @@
 #define Cell_hpp
 
 #include <vector>
-#include <functional>
 
 #include <SFML/Graphics/Vertex.hpp>
+#include <SFML/Graphics/RectangleShape.hpp>
 
 #include "../Util/Vect.h"
+#include "../Util/Config.h"
+
 
 using namespace std;
 
@@ -23,15 +25,11 @@ using namespace std;
  *
  * @link https://en.wikipedia.org/wiki/Conway's_Game_of_Life#Rules
  */
-struct Cell : public sf::Vertex {
+struct Cell : public sf::RectangleShape {
     
 private:
     
-    /**
-     * Since a cell doesn't store its own position, it must be instantiated with a function object
-     * that can provide this cell's location
-     */
-    function<vec2<unsigned int>()> positionGetter;
+    static vec2<unsigned> calculatePositionInPixelCoordinates(const unsigned size, const vec2<unsigned> positionInGridCoordinates);
     
 public:
     
@@ -40,13 +38,16 @@ public:
         dead = false
     } state = State::dead;
         
-    Cell(function<vec2<unsigned int>()> positionGetter) :
-        positionGetter(positionGetter)
+    Cell(const unsigned size, const vec2<unsigned> positionOnGrid, const TrueColor color) :
+        sf::RectangleShape(vec2<float>{size, size})
     {
-        
+        this->setPosition(calculatePositionInPixelCoordinates(size, positionOnGrid));
+        this->setFillColor(color);
     }
         
-    vec2<unsigned int> getPosition() const;
+    vec2<unsigned> getPosition() const {
+        return this->sf::Transformable::getPosition();
+    }
 };
 
 #endif /* Cell_hpp */

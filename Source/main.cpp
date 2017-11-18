@@ -15,16 +15,6 @@ using namespace std;
 
 
 int main(int argc, const char * argv[]) {
-    
-    auto positionGetter = [] () -> vec2<unsigned int> {
-        return {1, 1};
-    };
-    
-    Cell cell(positionGetter);
-    auto pos = cell.getPosition();
-    
-
-
     Game gameOfLife;
 
     gameOfLife.run();

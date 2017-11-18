@@ -8,13 +8,23 @@
 #ifndef Game_hpp
 #define Game_hpp
 
+#include <vector>
+
+#include "./Model/Grid.hpp"
 #include "./View/Window.h"
+#include "./Util/Config.h"
 
 class Game {
     
-    Window window;
+    Grid grid = Grid(gridSize, cellSize);
     
+    Window window;
+
     void listenForEvents();
+    
+    void render();
+    
+    void recenterView();
     
 public:
     

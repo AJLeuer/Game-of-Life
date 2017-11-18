@@ -21,12 +21,15 @@ struct TrueColor {
 	
 	array<byte, 4> RGBA ;
 	
-	inline constexpr TrueColor(byte R, byte G, byte B, byte A) : RGBA({R, G, B, A}) {}
+	inline constexpr TrueColor(byte R, byte G, byte B, byte A) : RGBA {R, G, B, A} {}
 	
-	inline constexpr operator array<byte, 4>() const { return this->RGBA ; }
+    template <typename ColorType>
+    inline constexpr TrueColor(const ColorType & otherColor) : TrueColor(otherColor.r, otherColor.g, otherColor.b, otherColor.a) {}
 	
 	template <typename ColorType>
 	inline constexpr operator ColorType() const { return ColorType { R(), G(), B(), A()} ; }
+    
+    inline constexpr operator array<byte, 4>() const { return this->RGBA ; }
 	
 	inline constexpr byte R() const { return RGBA[0] ; }
 	

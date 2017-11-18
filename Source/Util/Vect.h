@@ -34,18 +34,29 @@ struct vec2 {
 	
 	
 	simd_vector_2<NumericType> value ;
-	
-	
-	//inline constexpr vec2() : value(simd_vector_2<NumericType>{0, 0}) {}
+    
+    inline constexpr vec2(NumericType n) : value(simd_vector_2<NumericType> {n, n}) {}
+    
+    inline constexpr vec2(NumericType x, NumericType y) : value(simd_vector_2<NumericType> {x, y}) {}
+    
+    template <typename OtherNumericType>
+    inline constexpr vec2(OtherNumericType x, OtherNumericType y) : value {static_cast<NumericType>(x), static_cast<NumericType>(y)} {}
 	
 	inline constexpr vec2(const vec2 & other) : value(other.value) {}
 	
-	inline constexpr vec2(const simd_vector_2<NumericType> val) : value(val) {}
+	//inline constexpr vec2(const simd_vector_2<NumericType> val) : value(val) {}
 	
-	template <typename NumericType0>
-	inline constexpr vec2(const simd_vector_2<NumericType0> val) : value{static_cast<NumericType>(val.x), static_cast<NumericType>(val.y)} {}
-	
-	inline constexpr vec2(NumericType x, NumericType y) : value(simd_vector_2<NumericType> {x, y}) {}
+    template <typename OtherNumericType>
+    inline constexpr vec2(const vec2<OtherNumericType> val) : value {static_cast<NumericType>(val.x()), static_cast<NumericType>(val.y())} {}
+    
+	template <typename OtherNumericType>
+	inline constexpr vec2(const simd_vector_2<OtherNumericType> val) : value {static_cast<NumericType>(val.x), static_cast<NumericType>(val.y)} {}
+    
+//    template<typename OtherVectorType>
+//    inline constexpr vec2(const OtherVectorType & val) : vec2 (val.position) {}
+    
+    template<typename OtherNumericType, template<typename> typename OtherVectorType>
+    inline constexpr vec2(const OtherVectorType<OtherNumericType> & val) : value {static_cast<NumericType>(val.x), static_cast<NumericType>(val.y)} {}
     
     inline constexpr vec2(initializer_list<NumericType> & init) : value(init) {}
 	
@@ -58,6 +69,15 @@ struct vec2 {
             static_cast<OtherNumericType>(value.y)
         } ;
 	}
+    
+    
+    template<typename OtherNumericType, template<typename> typename OtherVectorType>
+    inline operator OtherVectorType<OtherNumericType>() const {
+        return OtherVectorType<OtherNumericType> {
+            static_cast<OtherNumericType>(value.x),
+            static_cast<OtherNumericType>(value.y)
+        } ;
+    }
 	
 	
 	inline constexpr NumericType operator [] (size_t i) const { return value[i] ; }
@@ -67,7 +87,7 @@ struct vec2 {
 	inline constexpr bool operator != (vec2 other) const { return (!(*this == other)) ; }
 	
 
-	inline constexpr vec2 & operator += (vec2 other) {this->value += other.value ; return * this ;}
+	inline constexpr vec2 & operator += (vec2 other) { this->value += other.value ; return * this ;}
 	
 	inline constexpr vec2 & operator -= (vec2 other) {this->value -= other.value ; return * this ;}
 	
@@ -168,53 +188,6 @@ simd_vector_2<NumericType> operator + (const Direction & direction, const simd_v
 	return ret ;
 }
 
-
-/**
- * @note For conversion betweem SFML's vector type and native hardware (i.e. SSE, AltiVec, etc.) vector types (will probably work with other generic vector
- * data types as well)
- */
-template <typename NumericType>
-simd_vector_2<NumericType> convertToNativeVectorType(const sf::Vector2<NumericType> & sf_vec) {
-	simd_vector_2<NumericType> vector ;
-	vector[0] = sf_vec.x ;
-	vector[1] = sf_vec.y ;
-	return vector ;
-}
-
-/**
- * @note For conversion betweem SFML's vector type and native hardware (i.e. SSE, AltiVec, etc.) vector types (will probably work with other generic vector
- * data types as well)
- */
-template <typename NumericType>
-sf::Vector2<NumericType> convertToSFMLVectorType(const simd_vector_2<NumericType> & native_vec) {
-	sf::Vector2<NumericType> vector ;
-	vector.x = native_vec[0] ;
-	vector.y = native_vec[1]  ;
-	return vector ;
-}
-
-/**
- * @note For conversion betweem SFML's vector type and native hardware (i.e. SSE, AltiVec, etc.) vector types (will probably work with other generic vector data types as well)
- */
-template<typename OutputNumericType, typename InputNumericType>
-simd_vector_2<OutputNumericType> convertToNativeVectorType(const sf::Vector2<InputNumericType> & sf_vec) {
-	simd_vector_2<OutputNumericType> vector ;
-	vector[0] = sf_vec.x ;
-	vector[1] = sf_vec.y ;
-	return vector ;
-}
-
-/**
- * @note For conversion betweem SFML's vector type and native hardware (i.e. SSE, AltiVec, etc.) vector types (will probably work with other generic vector data types as well)
- */
-template <typename OutputNumericType, typename InputNumericType>
-sf::Vector2<OutputNumericType> convertToSFMLVectorType(const simd_vector_2<InputNumericType> & native_vec) {
-	sf::Vector2<OutputNumericType> vector ;
-	vector.x = native_vec[0] ;
-	vector.y = native_vec[1]  ;
-	return vector ;
-}
-
 template <typename Character, typename NumericType>
 basic_ostream<Character> & operator << (basic_ostream<Character> & out, const simd_vector_2<NumericType> & vect) {
 	out << "x = " << vect[0] << " y = " << vect[1] ;
@@ -251,7 +224,6 @@ template <typename NumericType>
 inline UniqueNumericIdentifier generateID(simd_vector_2<NumericType> vect) {
 	return hashTwoVector<simd_vector_2<NumericType>>(vect) ;
 }
-
 
 
 

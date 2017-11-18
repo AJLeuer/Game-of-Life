@@ -23,7 +23,7 @@ Font & Window::initFont() {
 }
 
 VideoMode & Window::setVideoMode() {
-	const vec2<unsigned> baseWindowSize {mainWindowSize.value.x, mainWindowSize.value.y} ;
+	const vec2<unsigned> baseWindowSize {mainWindowSizeLogicalPixels().value.x, mainWindowSizeLogicalPixels().value.y} ;
 	const float dpiScale (DisplayData::getDisplayScalingFactor<float>()) ;
 	vec2<unsigned> scaledWindowSize { static_cast<unsigned>(baseWindowSize.value.x * dpiScale), static_cast<unsigned>(baseWindowSize.value.y * dpiScale) } ;
 	videoMode = VideoMode(scaledWindowSize.value.x, scaledWindowSize.value.y) ;

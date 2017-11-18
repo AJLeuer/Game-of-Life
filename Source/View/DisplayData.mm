@@ -13,6 +13,7 @@ vec2<unsigned> DisplayData::calculateScreenResolution() {
 	
 	auto x = vf.size.width + vf.origin.x ;
 	auto y = vf.size.height + vf.origin.y ;
+    
 	return vec2<unsigned>{static_cast<unsigned>(x), static_cast<unsigned>(y)} ;
 }
 

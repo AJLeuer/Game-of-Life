@@ -4,22 +4,21 @@
 //
 //  Created by Adam J Leuer on 2017-11-15.
 //  Copyright © 2017 ThoughtWorks, Inc. All rights reserved.
-//
 
 #ifndef Grid_hpp
 #define Grid_hpp
 
+
 #include "Cell.hpp"
 #include "../Util/Config.h"
 
-class Grid {
+struct Grid {
     
-    vector< vector<Cell>> cellGrid;
+    vector< vector<Cell>> * cellGrid;
     
-public:
+    Grid(const unsigned size, const unsigned cellSize);
     
-    Grid();
-    
+    Cell & getCell(vec2<unsigned int> pos) { return cellGrid->at(pos.x()).at(pos.y()); }
 };
 
 #endif /* Grid_hpp */

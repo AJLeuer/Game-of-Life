@@ -100,7 +100,7 @@ void Window::displayText(const StringType & chars, const TrueColor color, const 
 	
 	vec2<unsigned> adjustedPos = where - middle ;
 	
-	text.setPosition(convertToSFMLVectorType<float, unsigned>(adjustedPos)) ;
+	text.setPosition(adjustedPos) ;
 	
 	this->RenderWindow::draw(text) ;
 }
