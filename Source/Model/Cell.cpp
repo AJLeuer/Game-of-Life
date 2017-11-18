@@ -31,3 +31,15 @@ vec2<unsigned> Cell::calculatePositionInPixelCoordinates(const unsigned size, co
     return centeredPixelCoordinates;
 }
 
+void Cell::update() {
+    State state = chooseAtRandom(State::dead, State::alive);
+    this->state = state;
+    
+    if (this->state == State::alive) {
+        setFillColor(Cell::livingCellColor);
+    }
+    else { //if (this->state == State::dead)
+        setFillColor(Cell::deadCellColor);
+    }
+}
+

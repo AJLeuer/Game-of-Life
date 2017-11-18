@@ -213,7 +213,7 @@ N randSignFlip(N n) {
 }
 
 template <typename T>
-T chooseAtRand(T t1, T t2) {
+T chooseAtRandom(T t1, T t2) {
 	FastRand<short> rand(0, 1) ;
 	bool first = rand.nextValue() ;
 	if (first) {
@@ -237,7 +237,7 @@ T chooseRandomElement(const Container<T, allocator<T>> container)  {
 }
 
 /**
- * Returns a random enumeration of enum type
+ * @return a random enumeration of enum type
  * SomeEnum. SomeEnum should ideally use integer values starting
  * at zero as the underlying value for its enumerations.
  *

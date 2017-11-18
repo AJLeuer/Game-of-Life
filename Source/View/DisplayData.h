@@ -9,6 +9,8 @@
 #ifndef DisplayData_h
 #define DisplayData_h
 
+#include <chrono>
+
 #include <CoreGraphics/CoreGraphics.h>
 
 #include "../Util/Vect.h"
@@ -56,7 +58,16 @@ public:
 	template<typename NumericType = unsigned>
 	static vec2<NumericType> getScreenResolution() ;
 	
+    /**
+     * @return The screen refresh rate, in Hertz
+     */
 	static double getScreenRefreshRate() ;
+    
+    /**
+     * @return The average length of time between each screen refresh,
+     * based on the refresh rate.
+     */
+    static const chrono::milliseconds getScreenRefreshInterval() ;
 	
 	/**
 	 * Checks if running in Retina mode

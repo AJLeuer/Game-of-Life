@@ -48,6 +48,11 @@ double DisplayData::getScreenRefreshRate() {
 	return CGDisplayModeGetRefreshRate(displayMode) ;
 }
 
+const chrono::milliseconds DisplayData::getScreenRefreshInterval() {
+    unsigned interval = 1000 / getScreenRefreshRate();
+    return chrono::milliseconds(interval) ;
+}
+
 bool DisplayData::hiDPI() {
 	
 	if (isInit == false) {

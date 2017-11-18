@@ -25,7 +25,7 @@ const vec2<unsigned> calculatePixelCenteringOffset() {
     vec2<unsigned> offset = viewCenter - halfGridSize;
     
     //for some reason the y offset this calculates pushes content too far down, so pull it back a bit
-    offset.value.y = offset.y() / 1.5;
+    offset.value.y = offset.y() * 0.75;
     
     return offset;
 }

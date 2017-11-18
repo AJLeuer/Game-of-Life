@@ -19,7 +19,7 @@ Grid::Grid(const unsigned size, const unsigned cellSize) :
         
         for (unsigned y = 0; y < size; y++) {
             
-            Cell cell(cellSize, {x, y}, cellColor);
+            Cell cell(cellSize, {x, y});
             
             gridColumn.push_back(cell);
             

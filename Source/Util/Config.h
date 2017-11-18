@@ -28,7 +28,7 @@ constexpr auto buttonMain = sf::Mouse::Button::Left ;
 /**
  * The number of pixels in each cell
  */
-static constexpr unsigned cellSize = 24;
+static constexpr unsigned cellSize = 16;
 
 /**
  * The number of pixels between each cell
@@ -38,7 +38,7 @@ static constexpr unsigned cellSpacing = 2;
 /**
  * The number of cells in each row and column of the grid
  */
-static constexpr unsigned gridSize = 48;
+static constexpr unsigned gridSize = 72;
 
 /**
  * The number of pixels composing the grid in the x and y directions

@@ -10,19 +10,34 @@
 
 
 void Game::run() {
+    /* Update the grid on another thread... */
+    std::thread modelUpdate(& Game::updateModels, this);
     
-    //recenterView();
-    gridSizeInPixels();
-    
+    /* ... and update the view on this one */
+    updateView();
+}
+
+void Game::updateView() {
     while (gameIsActive) {
         
         window.clear();
         
         listenForEvents();
-    
+        
         render();
         
         window.display();
+        
+        this_thread::sleep_for(DisplayData::getScreenRefreshInterval());
+    }
+}
+
+void Game::updateModels() {
+    while (gameIsActive) {
+        
+        update();
+        
+        this_thread::sleep_for(DisplayData::getScreenRefreshInterval());
     }
 }
 
@@ -30,17 +45,23 @@ void Game::listenForEvents() {
     sf::Event event;
     
     while (window.pollEvent(event)) {
-        ;
+        ; //todo
+    }
+}
+
+void Game::update() {
+    for (auto & columnOfCells : * grid.cellGrid) {
+        for (Cell & cell : columnOfCells) {
+            cell.update();
+        }
     }
 }
 
 void Game::render() {
     for (auto & columnOfCells : * grid.cellGrid) {
-        
         for (Cell & cell : columnOfCells) {
             window.draw(cell);
         }
-        
     }
 }
 

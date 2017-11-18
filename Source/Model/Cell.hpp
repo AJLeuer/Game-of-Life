@@ -14,8 +14,10 @@
 #include <SFML/Graphics/Vertex.hpp>
 #include <SFML/Graphics/RectangleShape.hpp>
 
-#include "../Util/Vect.h"
 #include "../Util/Config.h"
+#include "../Util/Vect.h"
+#include "../Util/Random.hpp"
+
 
 
 using namespace std;
@@ -31,6 +33,10 @@ private:
     
     static vec2<unsigned> calculatePositionInPixelCoordinates(const unsigned size, const vec2<unsigned> positionInGridCoordinates);
     
+    static constexpr TrueColor livingCellColor = cellColor;
+    
+    static constexpr TrueColor deadCellColor { 0x00, 0x00, 0x00, 0xC0 };
+    
 public:
     
     enum class State : bool {
@@ -38,16 +44,17 @@ public:
         dead = false
     } state = State::dead;
         
-    Cell(const unsigned size, const vec2<unsigned> positionOnGrid, const TrueColor color) :
+    Cell(const unsigned size, const vec2<unsigned> positionOnGrid) :
         sf::RectangleShape(vec2<float>{size, size})
     {
         this->setPosition(calculatePositionInPixelCoordinates(size, positionOnGrid));
-        this->setFillColor(color);
     }
         
     vec2<unsigned> getPosition() const {
         return this->sf::Transformable::getPosition();
     }
+        
+    void update();
 };
 
 #endif /* Cell_hpp */
