@@ -37,6 +37,10 @@ private:
     
     static constexpr TrueColor deadCellColor { 0x00, 0x00, 0x00, 0xC0 };
     
+    vec2<unsigned> gridPosition;
+    
+    vector<Cell *> neighbors;
+    
 public:
     
     enum class State : bool {
@@ -45,13 +49,22 @@ public:
     } state = State::dead;
         
     Cell(const unsigned size, const vec2<unsigned> positionOnGrid) :
-        sf::RectangleShape(vec2<float>{size, size})
+        sf::RectangleShape(vec2<float>{size, size}),
+        gridPosition(positionOnGrid)
     {
         this->setPosition(calculatePositionInPixelCoordinates(size, positionOnGrid));
+    }
+    
+    void setNeighbors(const vector<Cell *> & neighbors) {
+        this->neighbors = neighbors;
     }
         
     vec2<unsigned> getPosition() const {
         return this->sf::Transformable::getPosition();
+    }
+        
+    const vec2<unsigned> getGridPosition() const {
+        return gridPosition;
     }
         
     void update();

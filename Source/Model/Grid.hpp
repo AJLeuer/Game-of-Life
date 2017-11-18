@@ -14,6 +14,16 @@
 
 struct Grid {
     
+private:
+    
+    void createCells(const unsigned size);
+    
+    void initializeAllCellNeighbors();
+    
+    void initializeCellNeighbors(Cell & cell);
+    
+public:
+    
     vector< vector<Cell>> * cellGrid;
     
     Grid(const unsigned size, const unsigned cellSize);
