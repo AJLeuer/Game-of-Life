@@ -29,17 +29,17 @@ constexpr auto buttonMain = sf::Mouse::Button::Left ;
 /**
  * The number of pixels in each cell
  */
-static constexpr unsigned cellSize = 16;
+static constexpr unsigned cellSize = 36;
 
 /**
  * The number of pixels between each cell
  */
-static constexpr unsigned cellSpacing = 2;
+static constexpr unsigned cellSpacing = 1;
 
 /**
  * The number of cells in each row and column of the grid
  */
-static constexpr unsigned gridSize = 72;
+static constexpr unsigned gridSize = 36;
 
 /**
  * The number of pixels composing the grid in the x and y directions
@@ -54,7 +54,7 @@ static constexpr TrueColor cellColor(0x00, 0xC0, 0xFF, 0xFF);
 extern vec2<unsigned> mainWindowSizeLogicalPixels() ;
 extern vec2<unsigned> mainWindowSizePhysicalPixels() ;
 
-static constexpr chrono::milliseconds defaultRefreshRateInterval(32);
+static constexpr chrono::milliseconds defaultRefreshRateInterval(384);
 
 extern const vec2<unsigned> pixelCenteringOffset;
 

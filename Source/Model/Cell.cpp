@@ -36,12 +36,12 @@ void Cell::update() {
 
 }
 
-void Cell::kill() {
+void Cell::die() {
     this->state = State::dead;
     this->setFillColor(Cell::deadCellColor);
 }
 
-void Cell::resurrect() {
+void Cell::live() {
     this->state = State::alive;
     this->setFillColor(Cell::livingCellColor);
 }

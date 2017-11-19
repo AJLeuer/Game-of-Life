@@ -53,13 +53,15 @@ class Game {
     
     static constexpr const std::array<const Rule *, 4> rules { & Game::rule0, & Game::rule1, & Game::rule2, & Game::rule3 };
     
-    static void checkCellsForRulesToApply(Cell & cell, stack<function<void()>> & ruleApplicators);
+    static void checkCellForRulesToApply(Cell & cell, stack<function<void()>> & ruleApplicators);
     
     static void applyRulesToCells(stack<function<void()>> & ruleApplicators);
     
     Grid grid = Grid(gridSize, cellSize);
     
     Window window;
+    
+    std::mutex sync;
     
     void updateView();
     

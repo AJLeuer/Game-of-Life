@@ -11,15 +11,10 @@
 
 
 Grid::Grid(const unsigned size, const unsigned cellSize) :
-    cellGrid(new vector<vector<Cell>>())
+    cellGrid(vector<vector<Cell>>())
 {
     createCells(size);
     initializeAllCellNeighbors();
-
-    auto & firstColumn = cellGrid->at(gridSize - 1);
-    auto & secondToLastColumn = cellGrid->at(gridSize - 2); //debug
-    auto & lastColumn = cellGrid->at(gridSize - 1);
-    bool ignore = true;
 }
 
 void Grid::createCells(const unsigned size) {
@@ -27,14 +22,15 @@ void Grid::createCells(const unsigned size) {
         vector<Cell> gridColumn = vector<Cell>();
         for (unsigned y = 0; y < size; y++) {
             Cell cell(cellSize, {x, y});
+            cell.die();
             gridColumn.push_back(std::move(cell));
         }
-        cellGrid->push_back(std::move(gridColumn));
+        cellGrid.push_back(std::move(gridColumn));
     }
 }
 
 void Grid::initializeAllCellNeighbors() {
-    for (auto & columnOfCells : * cellGrid) {
+    for (auto & columnOfCells : cellGrid) {
         for (Cell & cell : columnOfCells) {
             initializeCellNeighbors(cell);
         }
@@ -56,7 +52,7 @@ void Grid::initializeCellNeighbors(Cell & cell) {
             if ((x == position.x()) && (y == position.y())) {
                 continue;
             }
-            Cell & cell = cellGrid->at(x).at(y);
+            Cell & cell = cellGrid.at(x).at(y);
             neighbors.push_back(& cell);
         }
     }

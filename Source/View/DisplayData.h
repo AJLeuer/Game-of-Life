@@ -16,11 +16,6 @@
 #include "../Util/Vect.h"
 
 /**
- * Only exists for debugging
- */
-void inspectDisplayConfiguration() ;
-
-/**
  * Holds information about the resolution and scaling of the current display
  */
 struct DisplayData {

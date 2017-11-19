@@ -14,7 +14,7 @@ void Game::run() {
     seed();
     
     /* Update the grid on another thread... */
-    //std::thread modelUpdate(& Game::updateModels, this);
+    std::thread modelUpdate(& Game::updateModels, this);
     
     /* ... and update the view on this one */
     updateView();
@@ -24,9 +24,7 @@ void Game::updateView() {
     while (gameIsActive) {
         
         this_thread::sleep_for(defaultRefreshRateInterval);
-        
-        update(); //debug, put this back in updateModels()
-        
+
         window.clear();
         
         listenForEvents();
@@ -34,11 +32,13 @@ void Game::updateView() {
         render();
         
         window.display();
-        
     }
 }
 
 void Game::updateModels() {
+    
+    this_thread::sleep_for(chrono::seconds(2)); //wait for the rendering to get started first
+    
     while (gameIsActive) {
         
         this_thread::sleep_for(defaultRefreshRateInterval);
@@ -59,9 +59,9 @@ void Game::update() {
     
     stack<function<void()>> ruleApplicators;
     
-    for (auto & columnOfCells : * grid.cellGrid) {
+    for (auto & columnOfCells : grid.cellGrid) {
         for (Cell & cell : columnOfCells) {
-            checkCellsForRulesToApply(cell, ruleApplicators);
+            checkCellForRulesToApply(cell, ruleApplicators);
         }
     }
     
@@ -69,7 +69,7 @@ void Game::update() {
 }
 
 void Game::render() {
-    for (auto & columnOfCells : * grid.cellGrid) {
+    for (auto & columnOfCells : grid.cellGrid) {
         for (Cell & cell : columnOfCells) {
             window.draw(cell);
         }
@@ -82,7 +82,7 @@ void Game::recenterView() {
     window.setView(view);
 }
 
-void Game::checkCellsForRulesToApply(Cell & cell, stack<function<void()>> & ruleApplicators) {
+void Game::checkCellForRulesToApply(Cell & cell, stack<function<void()>> & ruleApplicators) {
     for (auto rule : rules) {
         rule->check(cell, ruleApplicators);
     }
@@ -101,7 +101,7 @@ void DiesWhenLessThanTwoNeighboursAliveIfAlive::check(Cell & cell, stack<functio
         unsigned livingNeighbors = cell.countOfNeighborCellsInState(Cell::State::alive);
         
         if (livingNeighbors < 2) {
-            function<void()> killCell = std::bind(& Cell::kill, std::ref(cell));
+            function<void()> killCell = std::bind(& Cell::die, std::ref(cell));
             ruleApplicators.push(killCell);
         }
     }
@@ -122,7 +122,7 @@ void DiesWhenMoreThanThreeNeighboursAliveIfAlive::check(Cell & cell, stack<funct
         unsigned livingNeighbors = cell.countOfNeighborCellsInState(Cell::State::alive);
         
         if (livingNeighbors > 3) {
-            function<void()> killCell = std::bind(& Cell::kill, std::ref(cell));
+            function<void()> killCell = std::bind(& Cell::die, std::ref(cell));
             ruleApplicators.push(killCell);
         }
     }
@@ -133,7 +133,7 @@ void RegeneratesWhenExactlyThreeNeighborsAliveIfDead::check(Cell & cell, stack<f
         unsigned livingNeighbors = cell.countOfNeighborCellsInState(Cell::State::alive);
         
         if (livingNeighbors == 3) {
-            function<void()> resurrectCell = std::bind(& Cell::resurrect, std::ref(cell));
+            function<void()> resurrectCell = std::bind(& Cell::live, std::ref(cell));
             ruleApplicators.push(resurrectCell);
         }
     }
@@ -142,17 +142,20 @@ void RegeneratesWhenExactlyThreeNeighborsAliveIfDead::check(Cell & cell, stack<f
 
 void Game::seed() {
     
-//    for (unsigned x = 8; x < 12; x++) {
-//        for (unsigned y = 8; y < 12; y++) {
-//            if (FastRand<bool>::defaultRandom.nextValue() == true) {
-//                grid.getCell({x, y}).resurrect();
-//            }
-//        }
-//    }
+    for (unsigned x = 8; x < 12; x++) {
+        for (unsigned y = 8; y < 12; y++) {
+            if (FastRand<bool>::defaultRandom.nextValue() == true) {
+                grid.getCell({x, y}).live();
+            }
+        }
+    }
 
-    grid.getCell({4, 5}).resurrect();
-    grid.getCell({4, 6}).resurrect();
-    grid.getCell({4, 7}).resurrect();
+    
+//    grid.getCell({4, 5}).live();
+//    grid.getCell({3, 6}).live();
+//    grid.getCell({4, 6}).live();
+//    grid.getCell({5, 6}).live();
+//    grid.getCell({4, 7}).live();
 }
 
 

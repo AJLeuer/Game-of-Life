@@ -55,10 +55,11 @@ public:
         gridPosition(positionOnGrid)
     {
         this->setPosition(calculatePositionInPixelCoordinates(size, positionOnGrid));
-        kill();
+        die();
     }
     
     Cell(Cell && other) :
+        sf::RectangleShape(std::move(other)),
         gridPosition(std::move(other.gridPosition)),
         neighbors(std::move(other.neighbors))
     {
@@ -69,6 +70,7 @@ public:
         
     Cell & operator = (Cell && other) {
         if (this != & other) {
+            this->sf::RectangleShape::operator=(other);
             gridPosition = std::move(other.gridPosition);
             neighbors = std::move(other.neighbors);
         }
@@ -99,9 +101,9 @@ public:
         
     void update();
         
-    void kill();
+    void die();
         
-    void resurrect();
+    void live();
 };
 
 #endif /* Cell_hpp */

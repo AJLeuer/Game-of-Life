@@ -24,11 +24,11 @@ private:
     
 public:
     
-    vector< vector<Cell>> * cellGrid;
+    vector< vector<Cell>> cellGrid;
     
     Grid(const unsigned size, const unsigned cellSize);
     
-    Cell & getCell(vec2<unsigned int> pos) { return cellGrid->at(pos.x()).at(pos.y()); }
+    Cell & getCell(vec2<unsigned int> pos) { return cellGrid.at(pos.x()).at(pos.y()); }
 };
 
 #endif /* Grid_hpp */

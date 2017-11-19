@@ -4,11 +4,6 @@
 
 #include "DisplayData.h"
 
-void inspectDisplayConfiguration() {
-	auto refreshRate = DisplayData::getScreenRefreshRate() ;
-}
-
-
 bool DisplayData::isInit = false ;
 
 bool DisplayData::hiDPI_referenceVal ;
