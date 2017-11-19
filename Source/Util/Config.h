@@ -11,6 +11,7 @@
 
 #include <iostream>
 #include <string>
+#include <chrono>
 
 #include <SFML/Window/Mouse.hpp>
 #include <SFML/Graphics/Font.hpp>
@@ -52,6 +53,8 @@ static constexpr TrueColor cellColor(0x00, 0xC0, 0xFF, 0xFF);
 
 extern vec2<unsigned> mainWindowSizeLogicalPixels() ;
 extern vec2<unsigned> mainWindowSizePhysicalPixels() ;
+
+static constexpr chrono::milliseconds defaultRefreshRateInterval(32);
 
 extern const vec2<unsigned> pixelCenteringOffset;
 

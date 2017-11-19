@@ -16,9 +16,9 @@ Grid::Grid(const unsigned size, const unsigned cellSize) :
     createCells(size);
     initializeAllCellNeighbors();
 
-    auto firstColumn = cellGrid->at(gridSize - 1);
-    auto secondToLastColumn = cellGrid->at(gridSize - 2); //debug
-    auto lastColumn = cellGrid->at(gridSize - 1);
+    auto & firstColumn = cellGrid->at(gridSize - 1);
+    auto & secondToLastColumn = cellGrid->at(gridSize - 2); //debug
+    auto & lastColumn = cellGrid->at(gridSize - 1);
     bool ignore = true;
 }
 
@@ -27,9 +27,9 @@ void Grid::createCells(const unsigned size) {
         vector<Cell> gridColumn = vector<Cell>();
         for (unsigned y = 0; y < size; y++) {
             Cell cell(cellSize, {x, y});
-            gridColumn.push_back(cell);
+            gridColumn.push_back(std::move(cell));
         }
-        cellGrid->push_back(gridColumn);
+        cellGrid->push_back(std::move(gridColumn));
     }
 }
 

@@ -33,9 +33,10 @@ private:
     
     static vec2<unsigned> calculatePositionInPixelCoordinates(const unsigned size, const vec2<unsigned> positionInGridCoordinates);
     
+    
     static constexpr TrueColor livingCellColor = cellColor;
     
-    static constexpr TrueColor deadCellColor { 0x00, 0x00, 0x00, 0xC0 };
+    static constexpr TrueColor deadCellColor { 0xF0, 0xF0, 0xF0, 0xFF };
     
     vec2<unsigned> gridPosition;
     
@@ -48,12 +49,33 @@ public:
         dead = false
     } state = State::dead;
         
+        
     Cell(const unsigned size, const vec2<unsigned> positionOnGrid) :
         sf::RectangleShape(vec2<float>{size, size}),
         gridPosition(positionOnGrid)
     {
         this->setPosition(calculatePositionInPixelCoordinates(size, positionOnGrid));
+        kill();
     }
+    
+    Cell(Cell && other) :
+        gridPosition(std::move(other.gridPosition)),
+        neighbors(std::move(other.neighbors))
+    {
+        
+    }
+        
+    Cell(const Cell & other) = delete;
+        
+    Cell & operator = (Cell && other) {
+        if (this != & other) {
+            gridPosition = std::move(other.gridPosition);
+            neighbors = std::move(other.neighbors);
+        }
+        return * this;
+    }
+        
+    Cell & operator = (const Cell & other) = delete;
     
     void setNeighbors(const vector<Cell *> & neighbors) {
         this->neighbors = neighbors;
@@ -66,8 +88,20 @@ public:
     const vec2<unsigned> getGridPosition() const {
         return gridPosition;
     }
+    
+    /**
+     * @param state The state to check
+     *
+     * @return The number of neighbor cells in the State state (i.e. the number alive or the number dead, depending on which state the caller
+     * wants to check)
+     */
+    const unsigned countOfNeighborCellsInState(const State state) const;
         
     void update();
+        
+    void kill();
+        
+    void resurrect();
 };
 
 #endif /* Cell_hpp */

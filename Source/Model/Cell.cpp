@@ -8,6 +8,7 @@
 
 #include "Cell.hpp"
 
+
 vec2<unsigned> centerPixelCoordinates(vec2<unsigned> coordinates) {
     coordinates += pixelCenteringOffset;
     return coordinates;
@@ -32,14 +33,33 @@ vec2<unsigned> Cell::calculatePositionInPixelCoordinates(const unsigned size, co
 }
 
 void Cell::update() {
-    State state = chooseAtRandom(State::dead, State::alive);
-    this->state = state;
-    
-    if (this->state == State::alive) {
-        setFillColor(Cell::livingCellColor);
-    }
-    else { //if (this->state == State::dead)
-        setFillColor(Cell::deadCellColor);
-    }
+
 }
+
+void Cell::kill() {
+    this->state = State::dead;
+    this->setFillColor(Cell::deadCellColor);
+}
+
+void Cell::resurrect() {
+    this->state = State::alive;
+    this->setFillColor(Cell::livingCellColor);
+}
+
+
+const unsigned Cell::countOfNeighborCellsInState(const State state) const {
+    unsigned count = 0;
+    
+    for (Cell * neighborCell : neighbors) {
+        if (neighborCell->state == state) {
+            count++;
+        }
+    }
+    return count;
+}
+
+
+
+
+
 
