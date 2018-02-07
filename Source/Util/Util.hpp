@@ -17,7 +17,7 @@
 #include <cmath>
 #include <typeinfo>
 
-using namespace std ;
+ ;
 
 constexpr long double 𝜋 = 3.141592653589793238462643383279502884197169399375105820974944L ; /* needs UTF-8 support */
 static constexpr auto & pi = 𝜋 ; //easier to type
@@ -113,7 +113,7 @@ N average(N first, N second) {
 }
 
 template<typename N>
-double average(const vector<N> & numbers) {
+    double average(const std::vector<N> & numbers) {
 	unsigned i = 0 ;
 	double sum = 0 ;
 	while(i < numbers.size()) {
@@ -164,7 +164,7 @@ inline float sinNeg(float n) {
 }
 
 template<typename T>
-T findSmallest_helper(unsigned long currSmallest, vector<T> cont) {
+    T findSmallest_helper(unsigned long currSmallest, std::vector<T> cont) {
 	//vector<T*> smallerElem = vector<T*>() ;
 	auto size = cont.size() ;
 	
@@ -182,12 +182,12 @@ T findSmallest_helper(unsigned long currSmallest, vector<T> cont) {
 }
 
 template<typename T>
-T findSmallest(vector<T> cont) {
+T findSmallest(std::vector<T> cont) {
 	return findSmallest_helper(0, cont) ;
 }
 
 template<typename T>
-T findLargest_helper(unsigned long currLargest, vector<T> cont) {
+T findLargest_helper(unsigned long currLargest, std::vector<T> cont) {
 	auto size = cont.size() ;
 	
 	for (auto i = 0 ; i != cont.size() ; i++) {
@@ -204,7 +204,7 @@ T findLargest_helper(unsigned long currLargest, vector<T> cont) {
 }
 
 template<typename T>
-T findLargest(vector<T> cont) {
+T findLargest(std::vector<T> cont) {
 	return findLargest_helper(0, cont) ;
 }
 
@@ -307,28 +307,28 @@ double convertToRadians(const Degrees angle_deg) {
 }
 	
 template <typename T>
-vector<T> & operator += (vector<T> & vect, const T & t) {
-	vect.push_back(t) ;
-	return vect ;
+std::vector<T> & operator += (std::vector<T> & vect, const T & t) {
+    vect.push_back(t) ;
+    return vect;
 }
 
 template <typename T>
-vector<T> operator + (const vector<T> & vect, const T & t) {
-	vector<T> copy(vect) ;
-	copy.push_back(t) ;
-	return vect ;
+std::vector<T> operator + (const std::vector<T> & vect, const T & t) {
+    std::vector<T> copy(vect) ;
+    copy.push_back(t) ;
+    return vect ;
 }
 
 template <typename T>
-vector<T> operator + (const vector<T> & leftSide, const vector<T> & rightSide) {
-	
-	vector<T> combined(leftSide) ; //copy leftSide
-	
-	for (typename vector<T>::size_type i = 0 ; i < rightSide.size() ; i++) {
-		combined += rightSide.at(i) ; //then copy everything from rightSide
-	}
-	
-	return combined ;
+std::vector<T> operator + (const std::vector<T> & leftSide, const std::vector<T> & rightSide) {
+
+    std::vector<T> combined(leftSide) ; //copy leftSide
+
+    for (typename std::vector<T>::size_type i = 0 ; i < rightSide.size() ; i++) {
+        combined += rightSide.at(i) ; //then copy everything from rightSide
+    }
+
+    return combined ;
 }
 
 

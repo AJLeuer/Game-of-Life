@@ -23,7 +23,7 @@ void Game::run() {
 void Game::updateView() {
     while (gameIsActive) {
         
-        this_thread::sleep_for(defaultRefreshRateInterval);
+        //this_thread::sleep_for(defaultRefreshRateInterval);
 
         window.clear();
         
@@ -37,11 +37,11 @@ void Game::updateView() {
 
 void Game::updateModels() {
     
-    this_thread::sleep_for(chrono::seconds(2)); //wait for the rendering to get started first
+    std::this_thread::sleep_for(std::chrono::seconds(2)); //wait for the rendering to get started first
     
     while (gameIsActive) {
         
-        this_thread::sleep_for(defaultRefreshRateInterval);
+        //this_thread::sleep_for(defaultRefreshRateInterval);
         
         update();
     }
@@ -69,8 +69,12 @@ void Game::update() {
 }
 
 void Game::render() {
-    for (auto & columnOfCells : grid.cellGrid) {
-        for (Cell & cell : columnOfCells) {
+    for (unsigned x = 0; x < grid.cellGrid.size(); x++) {
+        
+        auto & columnOfCells = grid.cellGrid.at(x);
+        
+        for (unsigned y = 0; y < columnOfCells.size(); y++) {
+            Cell & cell = columnOfCells.at(y);
             window.draw(cell);
         }
     }
@@ -142,20 +146,14 @@ void RegeneratesWhenExactlyThreeNeighborsAliveIfDead::check(Cell & cell, stack<f
 
 void Game::seed() {
     
-    for (unsigned x = 8; x < 12; x++) {
-        for (unsigned y = 8; y < 12; y++) {
-            if (FastRand<bool>::defaultRandom.nextValue() == true) {
+    for (unsigned x = 128; x < 220; x++) {
+        for (unsigned y = 128; y < 220; y++) {
+            if (FastRand<unsigned>::defaultRandom.nextValue(0, 5) ==  1) {
                 grid.getCell({x, y}).live();
             }
         }
     }
 
-    
-//    grid.getCell({4, 5}).live();
-//    grid.getCell({3, 6}).live();
-//    grid.getCell({4, 6}).live();
-//    grid.getCell({5, 6}).live();
-//    grid.getCell({4, 7}).live();
 }
 
 

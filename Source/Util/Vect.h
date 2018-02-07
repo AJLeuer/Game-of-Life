@@ -20,7 +20,7 @@
 
 #include "../Util/UniqueNumericID.h"
 
-using namespace std ;
+ ;
 
 constexpr unsigned lowerCaseA {97} ;
 
@@ -58,7 +58,7 @@ struct vec2 {
     template<typename OtherNumericType, template<typename> typename OtherVectorType>
     inline constexpr vec2(const OtherVectorType<OtherNumericType> & val) : value {static_cast<NumericType>(val.x), static_cast<NumericType>(val.y)} {}
     
-    inline constexpr vec2(initializer_list<NumericType> & init) : value(init) {}
+    inline constexpr vec2(std::initializer_list<NumericType> & init) : value(init) {}
 	
 	inline constexpr operator simd_vector_2<NumericType>() const { return this->value ; }
 	
@@ -189,7 +189,7 @@ simd_vector_2<NumericType> operator + (const Direction & direction, const simd_v
 }
 
 template <typename Character, typename NumericType>
-basic_ostream<Character> & operator << (basic_ostream<Character> & out, const simd_vector_2<NumericType> & vect) {
+std::basic_ostream<Character> & operator << (std::basic_ostream<Character> & out, const simd_vector_2<NumericType> & vect) {
 	out << "x = " << vect[0] << " y = " << vect[1] ;
 	return out ;
 }

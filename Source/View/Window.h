@@ -25,7 +25,7 @@
 
 #include "DisplayData.h"
 
-using namespace std ;
+ ;
 using VideoMode = sf::VideoMode;
 using Font = sf::Font;
 using Text = sf::Text;

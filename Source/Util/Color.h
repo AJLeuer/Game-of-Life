@@ -13,7 +13,8 @@
 #include <array>
 #include <cstdint>
 
-using namespace std ;
+using std::array;
+
 
 typedef uint8_t byte ;
 

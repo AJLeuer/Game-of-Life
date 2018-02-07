@@ -9,25 +9,28 @@
 #include "Cell.hpp"
 
 
-vec2<unsigned> centerPixelCoordinates(vec2<unsigned> coordinates) {
+vec2<int> centerPixelCoordinates(vec2<int> coordinates) {
     coordinates += pixelCenteringOffset;
     return coordinates;
 }
 
-vec2<unsigned> Cell::calculatePositionInPixelCoordinates(const unsigned size, const vec2<unsigned> positionInGridCoordinates) {
-
-    unsigned xPixelCoord = positionInGridCoordinates.x() * size;
-    unsigned yPixelCoord = positionInGridCoordinates.y() * size;
+vec2<int> Cell::calculatePositionInPixelCoordinates(const unsigned cellSize, const vec2<unsigned> positionInGridCoordinates) {
     
-    const unsigned horizontalGridSpacingOffset = positionInGridCoordinates.x() * cellSpacing;
-    const unsigned verticalGridSpacingOffset = positionInGridCoordinates.y() * cellSpacing;
+    int viewableGridAreaAdjustedOffset = (gridSize - displayedGridSize) / 2;
+    const vec2 <int> adjustedPositionInGridCoordinates = positionInGridCoordinates - vec2<int>{viewableGridAreaAdjustedOffset, viewableGridAreaAdjustedOffset};
+
+    int xPixelCoord = adjustedPositionInGridCoordinates.x() * cellSize;
+    int yPixelCoord = adjustedPositionInGridCoordinates.y() * cellSize;
+    
+    const int horizontalGridSpacingOffset = adjustedPositionInGridCoordinates.x() * cellSpacing;
+    const int verticalGridSpacingOffset = adjustedPositionInGridCoordinates.y() * cellSpacing;
     
     xPixelCoord += horizontalGridSpacingOffset;
     yPixelCoord += verticalGridSpacingOffset;
 
-    vec2<unsigned> initialPixelCoordinates{ xPixelCoord, yPixelCoord };
+    vec2<int> initialPixelCoordinates{ xPixelCoord, yPixelCoord };
     
-    vec2<unsigned> centeredPixelCoordinates = centerPixelCoordinates(initialPixelCoordinates);
+    vec2<int> centeredPixelCoordinates = centerPixelCoordinates(initialPixelCoordinates);
     
     return centeredPixelCoordinates;
 }

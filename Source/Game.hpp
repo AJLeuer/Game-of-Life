@@ -20,7 +20,8 @@
 #include "./Util/Config.h"
 #include "./Util/Random.hpp"
 
-using namespace std;
+using std::stack;
+using std::function;
 
 struct Rule {
     virtual void check(Cell & cell, stack<function<void()>> & ruleApplicators) const = 0;

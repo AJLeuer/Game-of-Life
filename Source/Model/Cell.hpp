@@ -19,8 +19,8 @@
 #include "../Util/Random.hpp"
 
 
+using std::vector;
 
-using namespace std;
 
 /**
  * @brief Represents a Cell in the Game of Life, see the Wikipedia page linked below for more info
@@ -31,7 +31,7 @@ struct Cell : public sf::RectangleShape {
     
 private:
     
-    static vec2<unsigned> calculatePositionInPixelCoordinates(const unsigned size, const vec2<unsigned> positionInGridCoordinates);
+    static vec2<int> calculatePositionInPixelCoordinates(const unsigned cellSize, const vec2<unsigned> positionInGridCoordinates);
     
     
     static constexpr TrueColor livingCellColor = cellColor;

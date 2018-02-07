@@ -18,11 +18,11 @@ sf::Font initDefaultFont() {
     return font;
 }
 
-const vec2<unsigned> calculatePixelCenteringOffset() {
+const vec2<int> calculatePixelCenteringOffset() {
     vec2<int> viewCenter = static_cast<vec2<int>>(mainWindowSizePhysicalPixels() / 2);
     vec2<int> halfGridSize = static_cast<vec2<int>>(gridSizeInPixels() / 2);
     
-    vec2<unsigned> offset = viewCenter - halfGridSize;
+    vec2<int> offset = viewCenter - halfGridSize;
     
     //for some reason the y offset this calculates pushes content too far down, so pull it back a bit
     offset.value.y = offset.y() * 0.75;
@@ -30,7 +30,7 @@ const vec2<unsigned> calculatePixelCenteringOffset() {
     return offset;
 }
 
-const vec2<unsigned> pixelCenteringOffset = calculatePixelCenteringOffset();
+const vec2<int> pixelCenteringOffset = calculatePixelCenteringOffset();
 
 vec2<unsigned> mainWindowSizeLogicalPixels() {
     vec2<unsigned> mainWindowSizeLogicalPixels = setMainWindowSize();

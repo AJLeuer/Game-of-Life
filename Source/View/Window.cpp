@@ -8,7 +8,7 @@
 
 #include "Window.h"
 
-using namespace std ;
+ ;
 //using namespace sf ;
 
 Font & Window::font = Window::initFont() ;

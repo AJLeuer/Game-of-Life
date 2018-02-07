@@ -18,7 +18,9 @@
 #include <cmath>
 
 
-using namespace std ;
+using std::uniform_int_distribution;
+using std::allocator;
+
 
 template<typename N>
 class FastRand {

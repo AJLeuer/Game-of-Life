@@ -11,7 +11,7 @@
 #include "Model/Cell.hpp"
 #include "Game.hpp"
 
-using namespace std;
+;
 
 
 int main(int argc, const char * argv[]) {

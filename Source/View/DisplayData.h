@@ -62,7 +62,7 @@ public:
      * @return The average length of time between each screen refresh,
      * based on the refresh rate.
      */
-    static const chrono::milliseconds getScreenRefreshInterval() ;
+    static const std::chrono::milliseconds getScreenRefreshInterval() ;
 	
 	/**
 	 * Checks if running in Retina mode
