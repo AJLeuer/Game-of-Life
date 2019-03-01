@@ -16,7 +16,7 @@
 
 #include "./Model/Grid.hpp"
 #include "./View/Window.h"
-#include "./View/DisplayData.h"
+#include "View/DisplayData.hpp"
 #include "./Util/Config.h"
 #include "./Util/Random.hpp"
 
@@ -56,6 +56,8 @@ class Game {
     
     static void checkCellForRulesToApply(Cell & cell, stack<function<void()>> & ruleApplicators);
     
+    void checkCellsForRulesToApply(vector< vector<Cell>> & cells, stack<function<void()>> & ruleApplicators);
+    
     static void applyRulesToCells(stack<function<void()>> & ruleApplicators);
     
     Grid grid = Grid(gridSize, cellSize);
@@ -74,9 +76,11 @@ class Game {
     
     void render();
     
+    float extracted(const sf::View &view);
+    
     void recenterView();
     
-    void seed();
+    void randomSeed();
     
 public:
     

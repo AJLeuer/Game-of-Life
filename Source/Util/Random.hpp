@@ -243,8 +243,8 @@ T chooseRandomElement(const Container<T, allocator<T>> container)  {
  * SomeEnum. SomeEnum should ideally use integer values starting
  * at zero as the underlying value for its enumerations.
  *
- * @param SomeEnum An enumeration type
- * @param N Some integer or floating point type
+ * @tparam SomeEnum An enumeration type
+ * @tparam N Some integer or floating point type
  * @param maximum The numerical value of the maximum enum of type SomeEnum
  */
 template<typename SomeEnum, typename N>

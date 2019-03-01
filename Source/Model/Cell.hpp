@@ -15,7 +15,7 @@
 #include <SFML/Graphics/RectangleShape.hpp>
 
 #include "../Util/Config.h"
-#include "../Util/Vect.h"
+#include "Util/Vect.hpp"
 #include "../Util/Random.hpp"
 
 
@@ -34,9 +34,9 @@ private:
     static vec2<int> calculatePositionInPixelCoordinates(const unsigned cellSize, const vec2<unsigned> positionInGridCoordinates);
     
     
-    static constexpr TrueColor livingCellColor = cellColor;
+    static constexpr TrueColor colorWhileAlive = liveCellColor;
     
-    static constexpr TrueColor deadCellColor { 0xF0, 0xF0, 0xF0, 0xFF };
+    static constexpr TrueColor colorWhenDead = deadCellColor;
     
     vec2<unsigned> gridPosition;
     

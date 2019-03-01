@@ -19,11 +19,11 @@
 #include <SFML/Graphics/Text.hpp>
 
 
-#include "../Util/Vect.h"
+#include "Util/Vect.hpp"
 #include "../Util/Color.h"
 #include "../Util/Config.h"
 
-#include "DisplayData.h"
+#include "DisplayData.hpp"
 
  ;
 using VideoMode = sf::VideoMode;

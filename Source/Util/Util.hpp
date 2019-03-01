@@ -113,7 +113,7 @@ N average(N first, N second) {
 }
 
 template<typename N>
-    double average(const std::vector<N> & numbers) {
+double average(const std::vector<N> & numbers) {
 	unsigned i = 0 ;
 	double sum = 0 ;
 	while(i < numbers.size()) {
@@ -164,8 +164,7 @@ inline float sinNeg(float n) {
 }
 
 template<typename T>
-    T findSmallest_helper(unsigned long currSmallest, std::vector<T> cont) {
-	//vector<T*> smallerElem = vector<T*>() ;
+T findSmallest_helper(unsigned long currSmallest, std::vector<T> cont) {
 	auto size = cont.size() ;
 	
 	for (auto i = 0 ; i != cont.size() ; i++) {

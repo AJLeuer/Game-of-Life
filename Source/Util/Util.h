@@ -6,8 +6,7 @@
 //  Copyright (c) 2015 Adam James Leuer. All rights reserved.
 //
 
-#ifndef __Chess__Util__
-#define __Chess__Util__
+#pragma once
 
 #include <iostream>
 #include <string>
@@ -19,5 +18,3 @@
 extern std::wstring_convert<std::codecvt_utf8<wchar_t>> stringConverter ;
 
 std::string convertToString(const std::wstring & wide_string) ;
-
-#endif /* defined(__Chess__Util__) */

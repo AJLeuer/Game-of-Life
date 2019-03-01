@@ -2,7 +2,7 @@
 
 #include "../Util/Util.hpp"
 
-#include "DisplayData.h"
+#include "DisplayData.hpp"
 
 bool DisplayData::isInit = false ;
 
@@ -19,7 +19,7 @@ void DisplayData::init() {
 	calculateDisplayScalingFactor() ;
 	
 	/* init hiDPI_referenceVal */
-	hiDPI_referenceVal = ((displayScalingFactor_referenceVal == 2.0) ? true : false) ;
+	hiDPI_referenceVal = (displayScalingFactor_referenceVal == 2.0);
 	
 	isInit = true ;
 	
@@ -49,7 +49,7 @@ const std::chrono::milliseconds DisplayData::getScreenRefreshInterval() {
 }
 
 bool DisplayData::hiDPI() {
-	
+
 	if (isInit == false) {
 		init() ;
 		return DisplayData::hiDPI_referenceVal ;

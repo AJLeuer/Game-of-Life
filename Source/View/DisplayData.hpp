@@ -13,7 +13,7 @@
 
 #include <CoreGraphics/CoreGraphics.h>
 
-#include "../Util/Vect.h"
+#include "Util/Vect.hpp"
 
 /**
  * Holds information about the resolution and scaling of the current display

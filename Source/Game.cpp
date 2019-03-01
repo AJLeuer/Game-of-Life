@@ -11,7 +11,7 @@
 
 void Game::run() {
     
-    seed();
+    randomSeed();
     
     /* Update the grid on another thread... */
     std::thread modelUpdate(& Game::updateModels, this);
@@ -21,9 +21,11 @@ void Game::run() {
 }
 
 void Game::updateView() {
+    recenterView();
+    
     while (gameIsActive) {
         
-        //this_thread::sleep_for(defaultRefreshRateInterval);
+        std::this_thread::sleep_for(defaultRefreshRateInterval);
 
         window.clear();
         
@@ -41,7 +43,7 @@ void Game::updateModels() {
     
     while (gameIsActive) {
         
-        //this_thread::sleep_for(defaultRefreshRateInterval);
+        std::this_thread::sleep_for(defaultRefreshRateInterval);
         
         update();
     }
@@ -56,15 +58,10 @@ void Game::listenForEvents() {
 }
 
 void Game::update() {
-    
     stack<function<void()>> ruleApplicators;
     
-    for (auto & columnOfCells : grid.cellGrid) {
-        for (Cell & cell : columnOfCells) {
-            checkCellForRulesToApply(cell, ruleApplicators);
-        }
-    }
-    
+    checkCellsForRulesToApply(grid.cellGrid, ruleApplicators);
+
     applyRulesToCells(ruleApplicators);
 }
 
@@ -82,8 +79,21 @@ void Game::render() {
 
 void Game::recenterView() {
     sf::View view = window.getView();
-    view.move((-1 * (view.getCenter().x) / 2), (-1 * (view.getCenter().y) / 4));
+    
+    auto xOffset = -1 * ((view.getCenter().x) / 2);
+    auto yOffset = -1 * ((view.getCenter().y) / 4);
+    
+    view.move(xOffset, yOffset);
     window.setView(view);
+}
+
+void Game::checkCellsForRulesToApply(vector< vector<Cell>> & cells, stack<function<void()>> & ruleApplicators) {
+    
+    for (auto & columnOfCells : cells) {
+        for (Cell & cell : columnOfCells) {
+            checkCellForRulesToApply(cell, ruleApplicators);
+        }
+    }
 }
 
 void Game::checkCellForRulesToApply(Cell & cell, stack<function<void()>> & ruleApplicators) {
@@ -144,10 +154,12 @@ void RegeneratesWhenExactlyThreeNeighborsAliveIfDead::check(Cell & cell, stack<f
 }
 
 
-void Game::seed() {
+void Game::randomSeed() {
+    constexpr auto startPos = gridSize * 0.25;
+    constexpr auto endPos = gridSize * 0.75;
     
-    for (unsigned x = 128; x < 220; x++) {
-        for (unsigned y = 128; y < 220; y++) {
+    for (unsigned x = startPos; x < endPos; x++) {
+        for (unsigned y = startPos; y < endPos; y++) {
             if (FastRand<unsigned>::defaultRandom.nextValue(0, 5) ==  1) {
                 grid.getCell({x, y}).live();
             }

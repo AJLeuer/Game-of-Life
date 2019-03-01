@@ -41,12 +41,12 @@ void Cell::update() {
 
 void Cell::die() {
     this->state = State::dead;
-    this->setFillColor(Cell::deadCellColor);
+    this->setFillColor(Cell::colorWhenDead);
 }
 
 void Cell::live() {
     this->state = State::alive;
-    this->setFillColor(Cell::livingCellColor);
+    this->setFillColor(Cell::colorWhileAlive);
 }
 
 
