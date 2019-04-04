@@ -1,19 +1,9 @@
-//
-//  DisplayData.h
-//  SpriteFight
-//
-//  Created by Adam James Leuer on 6/28/14.
-//  Copyright (c) 2014 Adam James Leuer. All rights reserved.
-//
-
-#ifndef DisplayData_h
-#define DisplayData_h
+#pragma once
 
 #include <chrono>
 
-#include <CoreGraphics/CoreGraphics.h>
+#include <Util/Vect.hpp>
 
-#include "Util/Vect.hpp"
 
 /**
  * Holds information about the resolution and scaling of the current display
@@ -24,17 +14,14 @@ private:
 	
 	static bool isInit ;
 	
-	static bool hiDPI_referenceVal ;
+	static bool highDPIReferenceValue ;
 	
 	/**
 	 * The display scaling factor.
 	 * For example, if the system is running in Retina mode,
 	 * this value will be 2.0
 	 */
-	static float displayScalingFactor_referenceVal ;
-	
-	static CGDirectDisplayID displayID ;
-	static CGDisplayModeRef displayMode ;
+	static float displayScalingFactorReferenceValue ;
 	
 	static void init() ;
 	
@@ -89,14 +76,9 @@ NumericType DisplayData::getDisplayScalingFactor() {
 	
 	if (isInit == false) {
 		init() ;
-		return DisplayData::displayScalingFactor_referenceVal ;
+		return DisplayData::displayScalingFactorReferenceValue ;
 	}
 	else {
-		return displayScalingFactor_referenceVal ;
+		return displayScalingFactorReferenceValue ;
 	}
 }
-
-
-
-
-#endif

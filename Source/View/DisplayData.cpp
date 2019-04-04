@@ -6,41 +6,35 @@
 
 bool DisplayData::isInit = false ;
 
-bool DisplayData::hiDPI_referenceVal ;
+bool DisplayData::highDPIReferenceValue ;
 
-float DisplayData::displayScalingFactor_referenceVal ;
-
-CGDirectDisplayID DisplayData::displayID = CGMainDisplayID() ;
-CGDisplayModeRef DisplayData::displayMode = CGDisplayCopyDisplayMode(displayID) ;
+float DisplayData::displayScalingFactorReferenceValue ;
 
 void DisplayData::init() {
 	
-	/* init displayScalingFactor_referenceVal */
+	/* init displayScalingFactorReferenceValue */
 	calculateDisplayScalingFactor() ;
 	
-	/* init hiDPI_referenceVal */
-	hiDPI_referenceVal = (displayScalingFactor_referenceVal == 2.0);
+	/* init highDPIReferenceValue */
+	highDPIReferenceValue = (displayScalingFactorReferenceValue == 2.0);
 	
 	isInit = true ;
 	
 }
 
-#ifndef __APPLE__
-
 /* non-OS X implementations: */
  
 vec2<unsigned> DisplayData::calculateScreenResolution() {
-	//todo
+	return {1440, 900};
 }
 
 void DisplayData::calculateDisplayScalingFactor() {
 	//todo
 }
 
-#endif
 
 double DisplayData::getScreenRefreshRate() {
-	return CGDisplayModeGetRefreshRate(displayMode) ;
+	return 120;
 }
 
 const std::chrono::milliseconds DisplayData::getScreenRefreshInterval() {
@@ -52,10 +46,10 @@ bool DisplayData::hiDPI() {
 
 	if (isInit == false) {
 		init() ;
-		return DisplayData::hiDPI_referenceVal ;
+		return DisplayData::highDPIReferenceValue ;
 	}
 	else {
-		return DisplayData::hiDPI_referenceVal ;
+		return DisplayData::highDPIReferenceValue ;
 	}
 	
 }

@@ -21,7 +21,7 @@
 
 using std::string;
 
-static constexpr bool gameIsActive = true;
+static bool gameIsActive = true;
 
 constexpr auto buttonMain = sf::Mouse::Button::Left ;
 

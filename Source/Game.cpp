@@ -9,6 +9,18 @@
 #include "Game.hpp"
 
 
+void Game::start()
+{
+	try
+	{
+		run();
+	}
+	catch (std::exception e)
+	{
+		gameIsActive = false;
+	}
+}
+
 void Game::run() {
     
     randomSeed();
