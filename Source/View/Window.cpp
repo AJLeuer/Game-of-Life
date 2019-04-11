@@ -31,12 +31,12 @@ VideoMode & Window::setVideoMode() {
 }
 
 
-#ifndef __APPLE__
 
 /* Below are the (unfinished) implementations for non-Apple platforms */
 
 Window::Window(const string & title, const TrueColor backgroundColor) :
-	RenderWindow(videoMode, title, sf::Style::Default, ContextSettings())
+	RenderWindow(videoMode, title, sf::Style::Default, getSettings()),
+	backgroundColor{0xAA, 0xAA, 0xAA, 0xAA}
 {
 
 }
@@ -47,9 +47,7 @@ void Window::setBackgroundColor(const TrueColor color) {
 	//todo implement for non-Apple unix, win
 }
 
-
-
-
-
-#endif
-
+void Window::display()
+{
+	sf::RenderWindow::display();
+}

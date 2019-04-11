@@ -54,7 +54,6 @@
 		668D38EF1F5F28A600068DF8 /* DisplayData.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = DisplayData.cpp; sourceTree = "<group>"; };
 		668D38F01F5F28A600068DF8 /* Window.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Window.cpp; sourceTree = "<group>"; };
 		668D38F11F5F28A600068DF8 /* Window.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Window.h; sourceTree = "<group>"; };
-		668D38F21F5F28A600068DF8 /* DisplayData.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DisplayData.h; sourceTree = "<group>"; };
 		668D38F31F5F28A600068DF8 /* Window.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = Window.mm; sourceTree = "<group>"; };
 		668D38F41F5F28A600068DF8 /* DisplayData.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = DisplayData.mm; sourceTree = "<group>"; };
 		668D38F61F5F2A3D00068DF8 /* Vect.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Vect.h; sourceTree = "<group>"; };
@@ -68,6 +67,7 @@
 		668D38FE1F5F2A3D00068DF8 /* Util.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Util.hpp; sourceTree = "<group>"; };
 		668D39021F5F2D7500068DF8 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		668D39041F5F2D7C00068DF8 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
+		66BCA7D92228C1270007D867 /* DisplayData.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = DisplayData.hpp; sourceTree = "<group>"; };
 		66F3706A1FBCE1440017DFCE /* Game.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Game.cpp; sourceTree = "<group>"; };
 		66F3706B1FBCE1440017DFCE /* Game.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Game.hpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -139,7 +139,7 @@
 			children = (
 				668D38EE1F5F28A600068DF8 /* Decl_Apple.h */,
 				668D38F11F5F28A600068DF8 /* Window.h */,
-				668D38F21F5F28A600068DF8 /* DisplayData.h */,
+				66BCA7D92228C1270007D867 /* DisplayData.hpp */,
 				668D38F31F5F28A600068DF8 /* Window.mm */,
 				668D38F01F5F28A600068DF8 /* Window.cpp */,
 				668D38F41F5F28A600068DF8 /* DisplayData.mm */,

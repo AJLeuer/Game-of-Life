@@ -78,7 +78,7 @@ public:
 	
 	Window & operator = (const Window & other) = delete ;
 
-	void display() ;
+	void display();
 	
 	void setBackgroundColor(const TrueColor color) ;
     const TrueColor & getBackgroundColor() const { return this->backgroundColor ; }

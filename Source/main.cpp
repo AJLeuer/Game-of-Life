@@ -12,10 +12,11 @@
 #include "Game.hpp"
 
 
-int main(int argc, const char * argv[]) {
+int main(int argc, const char * argv[])
+{
     Game gameOfLife;
 
-    gameOfLife.run();
+    gameOfLife.start();
 
     return 0;
 }

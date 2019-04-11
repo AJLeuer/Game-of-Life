@@ -66,8 +66,10 @@ class Game {
     Window window;
     
     std::mutex sync;
-    
-    void updateView();
+
+	void run();
+
+	void updateView();
     
     void updateModels();
 
@@ -85,8 +87,8 @@ class Game {
     
 public:
     
-    void run();
-    
+    void start();
+
 };
 
 #endif /* Game_hpp */
