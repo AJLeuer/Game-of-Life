@@ -22,7 +22,7 @@ void Game::run() {
 
 void Game::updateView() {
     recenterView();
-    
+
     while (gameIsActive) {
         
         std::this_thread::sleep_for(defaultRefreshRateInterval);
@@ -35,6 +35,7 @@ void Game::updateView() {
         
         window.display();
     }
+#pragma clang diagnostic pop
 }
 
 void Game::updateModels() {

@@ -13,6 +13,7 @@
 #include <thread>
 #include <chrono>
 #include <stack>
+#include <functional>
 
 #include "./Model/Grid.hpp"
 #include "./View/Window.h"

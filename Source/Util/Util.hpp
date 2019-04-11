@@ -4,7 +4,6 @@
 //
 //  Created by Adam James Leuer on 3/20/14.
 //  Copyright (c) 2014 Adam James Leuer. All rights reserved.
-//
 
 #ifndef AsteroidsLike_Util_h
 #define AsteroidsLike_Util_h
@@ -16,8 +15,6 @@
 #include <vector>
 #include <cmath>
 #include <typeinfo>
-
- ;
 
 constexpr long double 𝜋 = 3.141592653589793238462643383279502884197169399375105820974944L ; /* needs UTF-8 support */
 static constexpr auto & pi = 𝜋 ; //easier to type

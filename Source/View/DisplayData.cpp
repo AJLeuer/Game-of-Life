@@ -10,8 +10,10 @@ bool DisplayData::hiDPI_referenceVal ;
 
 float DisplayData::displayScalingFactor_referenceVal ;
 
+#ifndef __APPLE__
 CGDirectDisplayID DisplayData::displayID = CGMainDisplayID() ;
 CGDisplayModeRef DisplayData::displayMode = CGDisplayCopyDisplayMode(displayID) ;
+#endif
 
 void DisplayData::init() {
 	

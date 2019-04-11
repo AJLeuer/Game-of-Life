@@ -1,7 +1,7 @@
-cmake_minimum_required(VERSION 3.11)
+cmake_minimum_required(VERSION 3.6.2)
 project(Game_of_Life)
 
-set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD 14)
 
 include_directories(Source)
 include_directories(Source/Model)
@@ -20,7 +20,7 @@ add_executable(Game_of_Life
         Source/Util/Vect.hpp
         Source/View/DisplayData.cpp
         Source/View/DisplayData.hpp
-        Source/View/DisplayData.mm
+        #Source/View/DisplayData.mm
         Source/View/Window.cpp
         Source/View/Window.mm
         Source/Game.cpp
